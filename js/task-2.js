@@ -1,46 +1,34 @@
-const getUsersWithFriend = (users, friendName) => {
-    return users.filter((user) => {
-        if (user.friends.includes(friendName)) {
-            return user.name;
-        }
-    })
-};
+class Storage{
+  #items = [];
 
-const allUsers = [
-  {
-    name: "Moore Hensley",
-    friends: ["Sharron Pace"]
-  },
-  {
-    name: "Sharlene Bush",
-    friends: ["Briana Decker", "Sharron Pace"]
-  },
-  {
-    name: "Ross Vazquez",
-    friends: ["Marilyn Mcintosh", "Padilla Garrison", "Naomi Buckner"]
-  },
-  {
-    name: "Elma Head",
-    friends: ["Goldie Gentry", "Aisha Tran"]
-  },
-  {
-    name: "Carey Barr",
-    friends: ["Jordan Sampson", "Eddie Strong"]
-  },
-  {
-    name: "Blackburn Dotson",
-    friends: ["Jacklyn Lucas", "Linda Chapman"]
-  },
-  {
-    name: "Sheree Anthony",
-    friends: ["Goldie Gentry", "Briana Decker"]
+  constructor(elements){
+    this.#items = elements;
   }
-];
 
-console.log(getUsersWithFriend(allUsers, "Briana Decker")); 
+  getItems() {
+    return this.#items;
+  }
 
+  addItem(newItem) {
+    this.#items.push(newItem);
+  }
 
-console.log(getUsersWithFriend(allUsers, "Goldie Gentry"));
+  removeItem(itemToRemove) {
+    if (this.#items.includes(itemToRemove)) {
+      const index = this.#items.indexOf(itemToRemove);
+      this.#items.splice(index, 1);
+    }
+  }
+}
 
+const storage = new Storage(["Nanitoids", "Prolonger", "Antigravitator"]);
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
 
-console.log(getUsersWithFriend(allUsers, "Adrian Cross" )); // []
+storage.addItem("Droid");
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
+
+storage.removeItem("Prolonger");
+console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
+
+storage.removeItem("Scaner");
+console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
