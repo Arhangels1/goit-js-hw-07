@@ -1,32 +1,9 @@
-class StringBuilder {
-  #value;
+const usernameElem = document.querySelector('#name-input');
+const spanElem = document.querySelector('#name-output')
+usernameElem.addEventListener('input', onUsernameElemInput);
 
-  constructor(initialValue) {
-    this.#value = initialValue;
-  }
-
-  getValue() {
-    return this.#value;
-  }
-
-  padEnd(str) {
-    this.#value += str;
-  }
-
-  padStart(str) {
-    this.#value = str + this.#value;
-  }
-
-  padBoth(str) {
-    this.#value = str + this.#value + str;
-  }
+function onUsernameElemInput(event) {
+    if (usernameElem.value.trim() === '') {
+        spanElem.textContent = 'Anonymous';
+    } else spanElem.textContent = usernameElem.value.trim();
 }
-
-const builder = new StringBuilder(".");
-console.log(builder.getValue());
-builder.padStart("^");
-console.log(builder.getValue());
-builder.padEnd("^");
-console.log(builder.getValue());
-builder.padBoth("=");
-console.log(builder.getValue());
